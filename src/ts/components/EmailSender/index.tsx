@@ -8,7 +8,7 @@ import "./index.scss";
 const EmailSender: FC<IEmailSenderProps> = ({
   files,
   clearStatus,
-  setError,
+  setNotification,
 }): JSX.Element | null => {
   const [loading, setLoading] = useState<boolean>(false);
   if (!files || !files.length) return null;
@@ -52,9 +52,16 @@ const EmailSender: FC<IEmailSenderProps> = ({
       }
       clearStatus();
       setLoading(false);
+      setNotification({
+        label: String.fromCodePoint(128512),
+        isError: false,
+      });
     } catch ({ message }) {
       setLoading(false);
-      setError(message as string);
+      setNotification({
+        label: message as string,
+        isError: true,
+      });
     }
     return;
   };

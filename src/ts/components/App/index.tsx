@@ -1,19 +1,25 @@
 import React, { FC, useState, useRef } from "react";
 import FileLoader from "../FileLoader";
 import EmailSender from "../EmailSender";
-import CustomError from "../CustomError";
+import CustomNotification from "../CustomNotification";
 import FilesInfo from "../FilesInfo";
 
 import "../../../scss/index.scss";
 
 const App: FC = (): JSX.Element => {
   const [files, setFiles] = useState<File[] | null>(null);
-  const [error, setError] = useState<string>("");
+  const [notification, setNotification] = useState({
+    label: "",
+    isError: false,
+  });
   const fileLoaderRef = useRef<HTMLInputElement>(null);
 
   const clearStatus = (): void => {
     setFiles([]);
-    setError("");
+    setNotification({
+      label: "",
+      isError: false,
+    });
     if (fileLoaderRef.current) {
       fileLoaderRef.current.value = "";
     }
@@ -26,9 +32,12 @@ const App: FC = (): JSX.Element => {
       <EmailSender
         files={files}
         clearStatus={clearStatus}
-        setError={setError}
+        setNotification={setNotification}
       />
-      <CustomError error={error} />
+      <CustomNotification
+        notification={notification}
+        setNotification={setNotification}
+      />
     </div>
   );
 };

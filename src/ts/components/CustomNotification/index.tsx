@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC } from "react";
 import cx from "classnames";
 
 import { ICustomNotificationProps } from "./index.d";

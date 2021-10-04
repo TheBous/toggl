@@ -16,10 +16,6 @@ const App: FC = (): JSX.Element => {
 
   const clearStatus = (): void => {
     setFiles([]);
-    setNotification({
-      label: "",
-      isError: false,
-    });
     if (fileLoaderRef.current) {
       fileLoaderRef.current.value = "";
     }

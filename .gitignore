@@ -1,4 +1,5 @@
 .DS_Store
+stats.html
 
 # Node build artifacts
 node_modules
@@ -24,6 +25,3 @@ cypress/logs
 cypress.json
 coverage
 *.snap
-
-#stats
-stats.html

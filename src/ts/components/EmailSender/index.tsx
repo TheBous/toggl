@@ -12,7 +12,6 @@ const EmailSender: FC<IEmailSenderProps> = ({
   const endpoint = "https://toggl-hire-frontend-homework.vercel.app/api/send";
   const readFile = async (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
-      //   throw new Error("error");
       const fileReader = new FileReader();
       fileReader.onload = () => {
         resolve(fileReader.result as string);
@@ -24,12 +23,12 @@ const EmailSender: FC<IEmailSenderProps> = ({
 
   const sendEmails = async (): Promise<void> => {
     try {
-      const pendingEmails = files?.map(async (file) => {
+      const pendingEmails: Promise<string[]>[] = await files?.map(async (file) => {
         const fileContents = (await readFile(file)) as string;
-        const formattedFileContents = fileContents.replace(/\n$/, "");
+        const formattedFileContents: string = fileContents.replace(/\n$/, "");
         return formattedFileContents.split("\n");
       });
-      const emails = (await Promise.all(pendingEmails)).flat();
+      const emails: string[] = (await Promise.all(pendingEmails)).flat();
       const body = JSON.stringify({
         emails,
       });

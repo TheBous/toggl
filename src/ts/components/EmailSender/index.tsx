@@ -26,19 +26,24 @@ const EmailSender: FC<IEmailSenderProps> = ({
     try {
       const pendingEmails = files?.map(async (file) => {
         const fileContents = (await readFile(file)) as string;
-        return fileContents.split("\n");
+        const formattedFileContents = fileContents.replace(/\n$/, "");
+        return formattedFileContents.split("\n");
       });
       const emails = (await Promise.all(pendingEmails)).flat();
       const body = JSON.stringify({
         emails,
       });
-      await fetch(endpoint, {
+      const response = await fetch(endpoint, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
         },
         body,
       });
+      if (response.status !== 200) {
+        const { emails: errorEmails = [] } = await response.json();
+        throw new Error(`Error with mails ${errorEmails.join(", ")}`);
+      }
       clearStatus();
     } catch ({ message }) {
       setError(message as string);

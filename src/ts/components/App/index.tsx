@@ -1,8 +1,8 @@
-import React, { useState, FC } from "react"; 
+import React, { FC } from "react"; 
 
 const App: FC = (): JSX.Element => {
     return (
-        <div data-testid="container">
+        <div data-testid="container" className="toggl-container">
             
         </div>
     )

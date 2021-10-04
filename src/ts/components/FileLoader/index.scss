@@ -1,0 +1,20 @@
+.file-loader {
+    @include toggl-button();
+    border: solid rem-calc(2) white;
+    position: relative;
+    padding: 0;
+    & > .__label {
+        @include button-large();
+        margin: auto;
+        color: white;
+    }   
+    & > .__file {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+    }
+}

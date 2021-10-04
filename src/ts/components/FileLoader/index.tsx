@@ -2,7 +2,12 @@ import React, { FC, ChangeEvent } from "react";
 
 import { IFileLoaderProps } from "./index.d";
 
-const FileLoader: FC<IFileLoaderProps> = ({ setFiles, inputRef }): JSX.Element => {
+import "./index.scss";
+
+const FileLoader: FC<IFileLoaderProps> = ({
+  setFiles,
+  inputRef,
+}): JSX.Element => {
   const onFilesChange = async (e?: ChangeEvent): Promise<void> => {
     if (!e) return;
     e.preventDefault();
@@ -13,13 +18,18 @@ const FileLoader: FC<IFileLoaderProps> = ({ setFiles, inputRef }): JSX.Element =
   };
 
   return (
-    <input
-      onChange={onFilesChange}
-      type="file"
-      multiple
-      accept=".txt"
-      ref={inputRef}
-    />
+    <div className="file-loader">
+      <label className="__label" htmlFor="file" >🗄️ 📁 🗂️</label>
+      <input
+        id="file"
+        className="__file"
+        onChange={onFilesChange}
+        type="file"
+        multiple
+        accept=".txt"
+        ref={inputRef}
+      />
+    </div>
   );
 };
 

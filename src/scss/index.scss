@@ -1,3 +1,18 @@
-.reactssup {
-  display: block;
+@import "mixins";
+@import "breakpoints";
+@import "variables";
+@import "typo";
+@import "normalize";
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: $primary;
+
+  .toggl-container {
+    height: 100%;
+    @include flexbox();
+    @include align-items(center);
+    @include justify-content(center);
+    @include flex-flow(column);
+  }
 }

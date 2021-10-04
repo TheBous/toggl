@@ -1,0 +1,119 @@
+@mixin light() {
+  font-weight: 300 !important;
+}
+
+@mixin regular() {
+  font-weight: 400 !important;
+}
+
+@mixin medium() {
+  font-weight: 500 !important;
+}
+
+@mixin semi-bold() {
+  font-weight: 600 !important;
+}
+
+@mixin font-size-ultra-thin() {
+  font-size: rem-calc(10) !important;
+}
+
+@mixin font-size-thin() {
+  font-size: rem-calc(12) !important;
+}
+
+@mixin font-size-regular() {
+  font-size: rem-calc(15) !important;
+}
+
+@mixin font-size-pre-medium() {
+  font-size: rem-calc(18) !important;
+}
+
+@mixin font-size-medium() {
+  font-size: rem-calc(26) !important;
+}
+
+@mixin heading-h1() {
+  @include semi-bold();
+  font-size: rem-calc(30);
+  line-height: rem-calc(44);
+  letter-spacing: rem-calc(0.2);
+}
+
+@mixin heading-h2() {
+  @include medium();
+  font-size: rem-calc(26);
+  line-height: rem-calc(36);
+  letter-spacing: 0;
+}
+
+@mixin heading-h3() {
+  @include medium();
+  font-size: rem-calc(18);
+  line-height: rem-calc(28);
+  letter-spacing: rem-calc(0.1);
+}
+
+@mixin subtitle-large() {
+  @include medium();
+  font-size: rem-calc(16);
+  line-height: rem-calc(24);
+  letter-spacing: rem-calc(0.1);
+
+  @media #{$tablet-portrait-down} {
+    @include medium();
+    font-size: rem-calc(16);
+    line-height: rem-calc(24);
+    letter-spacing: rem-calc(0.1);
+  }
+}
+
+@mixin subtitle-small() {
+  @include medium();
+  font-size: rem-calc(14);
+  line-height: rem-calc(18);
+  letter-spacing: rem-calc(0.1);
+}
+
+@mixin body-large() {
+  @include regular();
+  font-size: rem-calc(15);
+  line-height: rem-calc(24);
+  letter-spacing: rem-calc(0.1);
+}
+
+@mixin body-small() {
+  @include regular();
+  font-size: rem-calc(12);
+  line-height: rem-calc(18);
+  letter-spacing: rem-calc(0.1);
+}
+
+@mixin info-large() {
+  @include medium();
+  font-size: rem-calc(12);
+  line-height: rem-calc(16);
+  letter-spacing: rem-calc(0.2);
+}
+
+@mixin info-small() {
+  @include regular();
+  font-size: rem-calc(12);
+  line-height: rem-calc(16);
+  letter-spacing: rem-calc(0.2);
+}
+
+@mixin button-large() {
+  @include semi-bold();
+  font-size: rem-calc(16);
+  line-height: rem-calc(20);
+  letter-spacing: rem-calc(0.6);
+}
+
+@mixin button-small() {
+  @include semi-bold();
+  font-size: rem-calc(14);
+  line-height: rem-calc(18);
+  letter-spacing: rem-calc(0.2);
+}

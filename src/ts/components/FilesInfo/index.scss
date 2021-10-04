@@ -1,0 +1,5 @@
+.file-info {
+    margin: rem-calc(20) 0;
+    color: white;
+    @include subtitle-small();
+}

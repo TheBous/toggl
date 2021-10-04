@@ -4,6 +4,8 @@ import EmailSender from "../EmailSender";
 import CustomError from "../CustomError";
 import FilesInfo from "../FilesInfo";
 
+import "../../../scss/index.scss";
+
 const App: FC = (): JSX.Element => {
   const [files, setFiles] = useState<File[] | null>(null);
   const [error, setError] = useState<string>("");

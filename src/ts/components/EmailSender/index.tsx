@@ -1,12 +1,16 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
+import cx from "classnames";
 
 import { IEmailSenderProps } from "./index.d";
+
+import "./index.scss";
 
 const EmailSender: FC<IEmailSenderProps> = ({
   files,
   clearStatus,
   setError,
 }): JSX.Element | null => {
+  const [loading, setLoading] = useState<boolean>(false);
   if (!files || !files.length) return null;
 
   const endpoint = "https://toggl-hire-frontend-homework.vercel.app/api/send";
@@ -23,11 +27,14 @@ const EmailSender: FC<IEmailSenderProps> = ({
 
   const sendEmails = async (): Promise<void> => {
     try {
-      const pendingEmails: Promise<string[]>[] = await files?.map(async (file) => {
-        const fileContents = (await readFile(file)) as string;
-        const formattedFileContents: string = fileContents.replace(/\n$/, "");
-        return formattedFileContents.split("\n");
-      });
+      setLoading(true);
+      const pendingEmails: Promise<string[]>[] = await files?.map(
+        async (file) => {
+          const fileContents = (await readFile(file)) as string;
+          const formattedFileContents: string = fileContents.replace(/\n$/, "");
+          return formattedFileContents.split("\n");
+        }
+      );
       const emails: string[] = (await Promise.all(pendingEmails)).flat();
       const body = JSON.stringify({
         emails,
@@ -44,15 +51,25 @@ const EmailSender: FC<IEmailSenderProps> = ({
         throw new Error(`Error with mails ${errorEmails.join(", ")}`);
       }
       clearStatus();
+      setLoading(false);
     } catch ({ message }) {
+      setLoading(false);
       setError(message as string);
     }
     return;
   };
 
+  const classnames = "__action";
+  if (loading) classnames.concat(" --loading");
+
   return (
     <div className="email-sender">
-      <button onClick={sendEmails}>Send emails</button>
+      <button
+        className={cx("__action", { "--loading": loading })}
+        onClick={sendEmails}
+      >
+        <span>📤</span>
+      </button>
     </div>
   );
 };

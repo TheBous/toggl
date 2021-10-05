@@ -1,5 +1,7 @@
 import React, { FC, ChangeEvent, DragEvent, useState } from "react";
 import cx from "classnames";
+import readline from "readline";
+import fs from "fs";
 
 import { IFileLoaderProps } from "./index.d";
 
@@ -25,7 +27,6 @@ const FileLoader: FC<IFileLoaderProps> = ({
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
-
     setDropzone(true);
   };
   const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
@@ -38,18 +39,18 @@ const FileLoader: FC<IFileLoaderProps> = ({
     e.preventDefault();
     e.stopPropagation();
     const dndFiles: File[] = [...e.dataTransfer.files];
-    if (dndFiles) {
+    if (!!dndFiles && dndFiles.length) {
       setDropzone(false);
       mergeFiles(dndFiles);
     }
   };
 
-  const onFilesChange = async (e?: ChangeEvent): Promise<void> => {
+  const onFilesChange = (e?: ChangeEvent): void => {
     if (!e) return;
     e.preventDefault();
-
     const eventTarget = e.target as HTMLInputElement;
     const allFiles = Array.from(eventTarget?.files as FileList);
+
     mergeFiles(allFiles);
   };
 

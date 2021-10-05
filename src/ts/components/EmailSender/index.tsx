@@ -3,6 +3,8 @@ import cx from "classnames";
 
 import { IEmailSenderProps } from "./index.d";
 
+import { readAndFormatFile } from "../../helpers/file";
+
 import "./index.scss";
 
 const EmailSender: FC<IEmailSenderProps> = ({
@@ -13,33 +15,19 @@ const EmailSender: FC<IEmailSenderProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   if (!files || !files.length) return null;
 
-  const endpoint = "https://toggl-hire-frontend-homework.vercel.app/api/send";
-  const readFile = async (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        resolve(fileReader.result as string);
-      };
-      fileReader.onerror = reject;
-      fileReader.readAsText(file);
-    });
-  };
+  const endpoint = "https://toggl-hire-frontend-homework.vercel.app";
 
   const sendEmails = async (): Promise<void> => {
     try {
       setLoading(true);
       const pendingEmails: Promise<string[]>[] = await files?.map(
-        async (file) => {
-          const fileContents = (await readFile(file)) as string;
-          const formattedFileContents: string = fileContents.replace(/\n$/, "");
-          return formattedFileContents.split("\n");
-        }
+        async (file) => readAndFormatFile(file)
       );
       const emails: string[] = (await Promise.all(pendingEmails)).flat();
       const body = JSON.stringify({
         emails,
       });
-      const response = await fetch(endpoint, {
+      const response = await fetch(`${endpoint}/api/send`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +38,6 @@ const EmailSender: FC<IEmailSenderProps> = ({
         const { emails: errorEmails = [] } = await response.json();
         throw new Error(`Error with mails ${errorEmails.join(", ")}`);
       }
-      clearStatus();
       setLoading(false);
       setNotification({
         label: String.fromCodePoint(128512),
@@ -62,6 +49,8 @@ const EmailSender: FC<IEmailSenderProps> = ({
         label: message as string,
         isError: true,
       });
+    } finally {
+      clearStatus();
     }
     return;
   };

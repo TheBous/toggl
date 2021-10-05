@@ -3,6 +3,11 @@
     border: solid rem-calc(2) white;
     position: relative;
     padding: 0;
+
+    &.--dropzone {
+        border-style: dotted;
+    }
+    
     & > .__label {
         @include button-large();
         margin: auto;

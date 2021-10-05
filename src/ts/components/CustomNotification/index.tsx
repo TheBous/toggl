@@ -12,7 +12,7 @@ const CustomNotification: FC<ICustomNotificationProps> = ({
   if (!label) return null;
   return (
     <div className={cx("notification", { "--error": isError })}>
-      <span>{label}</span>
+      <span className="__label">{label}</span>
       <span
         className="__close"
         role="button"

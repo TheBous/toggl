@@ -142,12 +142,12 @@ $rem-base: 15px !default;
   @include justify-content(center);
   @include align-items(center);
   @include button-large();
-  background-color: rgba(0, 0, 0, 0.09);
+  background-color: $button-primary;
   width: rem-calc(300);
   height: rem-calc(150);
 
   &:hover {
-    background-color: rgb(147 8 8 / 25%);
+    background-color: $button-primary-hover;
 }
 }
 

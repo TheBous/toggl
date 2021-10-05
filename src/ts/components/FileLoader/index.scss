@@ -6,6 +6,7 @@
 
     &.--dropzone {
         border-style: dotted;
+        background-color: $button-primary-hover;
     }
     
     & > .__label {

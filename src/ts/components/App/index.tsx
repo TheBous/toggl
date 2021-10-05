@@ -7,7 +7,7 @@ import FilesInfo from "../FilesInfo";
 import "../../../scss/index.scss";
 
 const App: FC = (): JSX.Element => {
-  const [files, setFiles] = useState<File[] | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
   const [notification, setNotification] = useState({
     label: "",
     isError: false,
@@ -23,7 +23,7 @@ const App: FC = (): JSX.Element => {
 
   return (
     <div data-testid="container" className="toggl-container">
-      <FileLoader setFiles={setFiles} inputRef={fileLoaderRef} />
+      <FileLoader files={files} setFiles={setFiles} inputRef={fileLoaderRef} />
       <FilesInfo files={files} />
       <EmailSender
         files={files}

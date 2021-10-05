@@ -145,6 +145,10 @@ $rem-base: 15px !default;
   background-color: rgba(0, 0, 0, 0.09);
   width: rem-calc(300);
   height: rem-calc(150);
+
+  &:hover {
+    background-color: rgb(147 8 8 / 25%);
+}
 }
 
 @mixin btnAnimations($name, $anchor, $edge) {
@@ -153,10 +157,10 @@ $rem-base: 15px !default;
   @if $anchor == "left" {
     $anchor-op: "right";
   }
-  @elseif $anchor == 'top' {
+  @else if $anchor == 'top' {
     $anchor-op: "bottom";
   }
-  @elseif $anchor == 'bottom' {
+  @else if $anchor == 'bottom' {
     $anchor-op: "top";
   }
 

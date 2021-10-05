@@ -6,6 +6,7 @@ import "./index.scss";
 
 const FileLoader: FC<IFileLoaderProps> = ({
   setFiles,
+  files,
   inputRef,
 }): JSX.Element => {
   const onFilesChange = async (e?: ChangeEvent): Promise<void> => {
@@ -14,12 +15,16 @@ const FileLoader: FC<IFileLoaderProps> = ({
 
     const eventTarget = e.target as HTMLInputElement;
     const allFiles = Array.from(eventTarget?.files as FileList);
-    if (!!allFiles && !!allFiles.length) setFiles(allFiles as File[]);
+    if (!!allFiles && !!allFiles.length) {
+      setFiles([...files, ...allFiles]);
+    }
   };
 
   return (
     <div className="file-loader">
-      <label className="__label" htmlFor="file" >🗄️ 📁 🗂️</label>
+      <label className="__label" htmlFor="file">
+        🗄️ 📁 🗂️
+      </label>
       <input
         id="file"
         className="__file"

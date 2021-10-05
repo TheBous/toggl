@@ -1,4 +1,5 @@
 export interface IFileLoaderProps {
-    setFiles: (updatedEmail: File[]) => void;
+    setFiles: (updatedFile: File[]) => void;
+    files: File[];
     inputRef: RefObject<HTMLInputElement>;
 }

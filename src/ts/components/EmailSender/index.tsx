@@ -54,10 +54,7 @@ const EmailSender: FC<IEmailSenderProps> = ({
     }
     return;
   };
-
-  const classnames = "__action";
-  if (loading) classnames.concat(" --loading");
-
+  
   return (
     <div className="email-sender">
       <button

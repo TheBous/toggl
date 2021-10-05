@@ -4,12 +4,12 @@
   <a href="https://github.com/TheBous">
     <img src="assets/reactssup.png" alt="Logo" width="250" height="250">
   </a>
-  <h3 align="center">ReactJS, Rollup, Typescript, SCSS, Eslint, Prettier, Jest.</h3>
+  <h3 align="center">Toggl frontend developer test.</h3>
   <p align="center">
-    ReactJS, Rollup, Typescript, SCSS, Eslint, Prettier, Jest.
+    Toggl frontend developer test.
   </p>
 </p>
 
 ## About The Project
 
-Easy boilerplate built with ReactJS, Rollup, Typescript, SCSS, Eslint, Prettier, Jest.
+Toggl frontend developer test

@@ -15,17 +15,14 @@ const FileLoader: FC<IFilesInfoProps> = ({ files }): JSX.Element | null => {
   const [fileInfos, setFileInfos] = useState<IFormattedFilesInfo[]>([]);
 
   useEffect(() => {
-    if (!files || !files.length) {
-      setFileInfos([]);
-    } else {
-      files.forEach(async (file) => {
-        const formattedInfos = {
-          file,
-          lines: (await readAndFormatFile(file)).length,
-        };
-        setFileInfos((oldFileInfo) => oldFileInfo.concat(formattedInfos));
-      });
-    }
+    setFileInfos([]);
+    files.forEach(async (file) => {
+      const formattedInfos = {
+        file,
+        lines: (await readAndFormatFile(file)).length,
+      };
+      setFileInfos((oldFileInfo) => oldFileInfo.concat(formattedInfos));
+    });
   }, [files.length]);
 
   if (!fileInfos || !fileInfos.length) return null;

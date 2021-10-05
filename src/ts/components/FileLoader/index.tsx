@@ -50,7 +50,6 @@ const FileLoader: FC<IFileLoaderProps> = ({
     e.preventDefault();
     const eventTarget = e.target as HTMLInputElement;
     const allFiles = Array.from(eventTarget?.files as FileList);
-
     mergeFiles(allFiles);
   };
 
